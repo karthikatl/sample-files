@@ -1,9 +1,20 @@
+// src/App.test.tsx
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import App from './App';
+import { Provider } from 'react-redux';
+import { store } from './app/store';
 
-test('renders learn react link', () => {
-  render(<App />);
-  const linkElement = screen.getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
+describe('App', () => {
+  it('renders the File Explorer header', () => {
+    render(<Provider store={store}><App /></Provider>);
+    const headerElement = screen.getByText(/File Explorer/i);
+    expect(headerElement).toBeInTheDocument();
+  });
+
+  it('renders the FileExplorer component', () => {
+    render(<Provider store={store}><App /></Provider>);
+    const fileExplorerElement = screen.getByTestId('file-explorer');
+    expect(fileExplorerElement).toBeInTheDocument();
+  });
 });
